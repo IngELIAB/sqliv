@@ -1,6 +1,7 @@
 SQLiv
 ===
-
+**este fork muestra la actualizacion de la sintaxis del lang=Python3.13 hasta la fecha.**
+**el autor principal es Ghost.**
 ### Massive SQL injection scanner  
 **Features**  
 1. multiple domain scanning with SQL injection dork by Bing, Google, or Yahoo
