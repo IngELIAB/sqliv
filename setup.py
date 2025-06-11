@@ -6,8 +6,8 @@ from sys import platform
 from shutil import copy2, rmtree
 from distutils.dir_util import copy_tree
 
-
-__author__ = "Ghost"
+#esta version del script de sqliv usaba la sintaxis de python version2 compuesta y actualizada mediante un fork le integre la sintaxis 3.13 de python
+__author__ = "this a principal author :Ghost"
 __email__ = "official.ghost@tuta.io"
 __license__ = "GPL"
 __version__ = "2.0"
@@ -22,8 +22,10 @@ EXEC_PATH_MAC = "/usr/local/bin"
 
 
 def metadata():
-    print "SQLiv (2.0) by {}".format(__author__)
-    print "Massive SQL injection vulnerability scanner"
+#hice cambios en las versiones de python, en ves de usar python version 2 (python2)
+#yo uso la version 3.13 y su sintaxis cambia  
+    print("SQLiv (2.0) by {}".format(__author__))
+    print ("Massive SQL injection vulnerability scanner")
 
 
 def dependencies(option):
@@ -33,7 +35,7 @@ def dependencies(option):
         with open("requirements.txt", "r") as requirements:
             dependencies = requirements.read().splitlines()
     except IOError:
-        print "requirements.txt not found, please redownload or do pull request again"
+        print ("requirements.txt not found, please redownload or do pull request again")
         exit(1)
 
     for lib in dependencies:
@@ -75,11 +77,11 @@ def uninstall(file_path, exec_path):
 
     if os.path.exists(file_path):
         rmtree(file_path)
-        print "Removed " + file_path
+        print ("Removed ") + file_path
 
     if os.path.isfile(exec_path):
         os.remove(exec_path)
-        print "Removed " + exec_path
+        print ("Removed ") + exec_path
 
 
 if __name__ == "__main__":
@@ -92,7 +94,7 @@ if __name__ == "__main__":
     if platform == "linux" or platform == "linux2":
         # Linux require root
         if os.getuid() != 0:
-            print "linux system requires root access for the installation"
+            print ("linux system requires root access for the installation")
             exit(1)
 
         FILE_PATH = FILE_PATH_LINUX
@@ -103,24 +105,24 @@ if __name__ == "__main__":
         EXEC_PATH = EXEC_PATH_MAC
 
     else:
-        print "Windows platform is not supported for installation"
+        print ("Windows platform is not supported for installation")
         exit(1)
 
     if args.install and not (args.reinstall or args.uninstall):
         #full installation to the system
 
         if os.path.exists(FILE_PATH):
-            print "sqliv is already installed under " + FILE_PATH
+            print ("sqliv is already installed under " + FILE_PATH)
             exit(1)
 
         if os.path.isfile(EXEC_PATH):
-            print "executable file exists under " + EXEC_PATH
+            print ("executable file exists under " + EXEC_PATH)
             exit(1)
 
         install(FILE_PATH, EXEC_PATH)
-        print "Installation finished"
-        print "Files are installed under " + FILE_PATH
-        print "Run: sqliv --help"
+        print ("Installation finished")
+        print ("Files are installed under " + FILE_PATH)
+        print ("Run: sqliv --help")
 
     elif args.uninstall and not (args.install or args.reinstall):
         # uninstall from the system
@@ -132,21 +134,21 @@ if __name__ == "__main__":
 
         if option == "Y":
             dependencies("uninstall")
-            print "Python dependencies removed"
+            print ("Python dependencies removed")
 
-        print "Uninstallation finished"
+        print ("Uninstallation finished")
 
     elif args.reinstall and not (args.install or args.uninstall):
         # reinstall to the system
 
         uninstall(FILE_PATH, EXEC_PATH)
-        print "Removed previous installed files"
+        print ("Removed previous installed files")
 
         install(FILE_PATH, EXEC_PATH)
-        print "Reinstallation finished"
-        print "Files are installed under " + FILE_PATH
-        print "Run: sqliv --help"
+        print ("Reinstallation finished")
+        print ("Files are installed under " + FILE_PATH)
+        print ("Run: sqliv --help")
 
     else:
-        metadata(); print ""
+        metadata(); print ("")
         parser.print_help()
